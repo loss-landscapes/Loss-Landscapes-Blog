@@ -1,24 +1,30 @@
 ---
 layout: post
-title: "Deep Neural Nets: 33 years ago and 33 years from now (Invited Post)"
+title: "Loss Landscapes"
 tags: [optimization, generalizability, loss]
 authors: Jacob Hansen, Christian Cmehil-Warn
 ---
 
 
-## Why Care about Loss?
+## Lost in the Loss
 
-Loss is the primary way of measuring progress when training deep learning models. In each epoch, the loss value decreasing is seen as a sign of progress and that the model is improving; however, the loss value alone tells us nothing about the model generalizablity. Given that deep learning models are often significantly overparameterized (i.e. there's many more parameters than data points), generalizabliity is an important goal. 
+Loss is the primary way of measuring progress when training deep learning models. Simply put, the higher the value the worse the model is, and the loss should be decreasing as the model is trained and improved upon. However, the actual values of loss depend greatly on the task that the deep learning model is performing.
 
-In spite of this, there is little empircal understanding of how any why models generalize (https://arxiv.org/abs/1611.03530). Research has show that one seemingly important factor in model generalizability is the "sharpness" of the loss minima that the optimized model settles on (https://arxiv.org/abs/1609.04836) and there have been new optimization techniques that have taken advantage of this fact to much success (https://arxiv.org/abs/2010.01412). 
 
-In this blog post we will explore the shape of the loss minima by exmining reduced dimensionality visualzatoins of the loss function, or the "loss landscape" and experiment with how different optimizers and parameters affect the sharpness.  
+For example, a classification task might use cross-entropy loss, which is calculated from the differences between predicted values and the ground truth labels. Yet, the loss could also be measured through KL Divergence, a measure of the difference between a model's output distribution and the distribution of a test set. Trying to compare either of those loss values is just as useless as comparing either to the mean-squared error loss used for a regression task. 
 
-## Loss vs Accuracy
+# TODO: Different types of Loss Chart
 
+Another case where loss cannot be compared between models is when they use different optimizers. As show in the charts below, its possible for a model with a lower loss and higher training accuracy to have a a worse test accuracy than a model with higher loss and lower training accuracy. Even though the dark green model has "better" training measures, its a model with over-fitting issues.
+
+# TODO: that one chart with the two models where one has
+
+Given that deep learning models are heavily over-parameterized, over-fitting is a serious concern. The above example shows that a more robust and generalizable model can have a higher loss; however, even validation accuracy has its limits as a measure when a model is going to be deployed to the real world. However, there's an important tool in understanding a model's generalizability: loss landscapes.
 
 
 ## Exploring the Loss Landscape
+
+
 
 
 ## Optimizers: Terraforming Loss Landscapes
