@@ -14,7 +14,7 @@ Loss cannot be compared between models when they use different optimizers. As sh
 
 ![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/loss-vs-accuracy.png)
 
-Because deep learning models have more parameters than training poitns, over-fitting is a serious concern. The above example shows that a more robust and generalizable model can have a higher loss; however, even validation accuracy has limits as a measure when condsidering real-world deployment. However, there's an important tool in understanding a model's generalizability: loss landscapes.
+Over-fitting is a serious concern because deep learning models have more parameters than training points. The above example shows that a more robust and generalizable model can have a higher loss; however, even validation accuracy has limits as a measure when condsidering real-world deployment. However, there's an important tool in understanding a model's generalizability: loss landscapes.
 
 
 ![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/overfitting.png)
@@ -24,18 +24,17 @@ Picture from [here](https://medium.com/greyatom/what-is-underfitting-and-overfit
 
 ## Exploring the Loss Landscape
 
-A loss landscape is a visualization of the loss function where each point is the loss of a model with a different set of parameters. Given that deep learning models often have thousands, if not millions, of parameters, the visualization is made after dimensionality reduction. Also to note that the visualizations are a subset of the landscape, often where a trained model ends up. 
+A loss landscape visualizes the loss function across different sets of parameters. Given the potentially millions of parameters, the dimensions of the landscape are reduced. The visualization subsets the landscape, often the subset where a trained model ends up. 
 
 
 ![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png)
 
 In loss landscapes, the local minima of the function are very apparent as well as how sharp they are. Sharper minima indicate that the model is less generalizable (ie more overfit) models that are less robust in real would situations.
 
-The shape of loss landscapes near the final minima are completely dependent on what optimizer the model uses. Some research has found that added skip connections results in a much smoother and easier to navigate loss landscape (https://arxiv.org/abs/1712.09913). Other new research has found that training on smaller batches of data results in models ending up in minima with a much wider "opening" at the top of the descent, resulting in better performace on unseen data. (https://arxiv.org/abs/1609.04836) 
+The shape of loss landscapes near the final minima completely depends on what optimizer the model uses. Some [research](https://arxiv.org/abs/1712.09913) found that added skip connections results in a much smoother loss landscape. Other new [research](https://arxiv.org/abs/1609.04836)  has found that training on smaller batches of data results in models ending up in minima with a much wider "opening" at the top of the descent, resulting in better performace on unseen data. 
 
-In fact, recent literature has found great success in designing optimizers around finding smoother areas of the loss landscape. Designed by reserachers at Google, Sharpness-Aware Minimization, or SAM, is an optimizer that minimizes both loss and loss sharpness. While more computationally expensive, the model trained achieved state of the art results on image labeling benchmarks.
+In fact, recent recent found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, is an optimizer that minimizes both loss and loss sharpness. While more computationally expensive, the model trained achieved state of the art results on image labeling benchmarks.
 
 ![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/our-sam.png)
 
-Loss landscapes are an important tool in making informed decisions about model architecture for generalization. Even if models don't seem to be improving on testing or validation sets, checking the loss landscape can be important to checking for overall generalizability. 
 
