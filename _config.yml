@@ -3,7 +3,7 @@ title:               The ICLR Blog Track
 tagline:             ''
 description:         'For short-term, peer-sourced tests of time, generalizations, specializations, reproductions, etc.!'
 url:                 https://loss-landscapes.github.io/Loss-Landscapes-Blog/
-baseurl:             '/'
+baseurl:             ''
 paginate:            30
 permalink:           pretty
 
