@@ -15,7 +15,7 @@ For example, a classification task might use cross-entropy loss, which is calcul
 
 # TODO: Different types of Loss Chart
 
-Another case where loss cannot be compared between models is when they use different optimizers. As show in the charts below, its possible for a model with a lower loss and higher training accuracy to have a a worse test accuracy than a model with higher loss and lower training accuracy. Even though the dark green model has "better" training measures, its a model with over-fitting issues.
+Another case where loss cannot be compared between models is when they use different optimizers. As shown in the charts below, its possible for a model with a lower loss and higher training accuracy to have a a worse test accuracy than a model with higher loss and lower training accuracy. Even though the dark green model has "better" training measures, its a model with over-fitting issues.
 
 ![]({{ site.url }}/public/images/2022-12-09-loss-landscapes/loss-vs-accuracy.png)
 
