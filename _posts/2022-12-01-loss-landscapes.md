@@ -6,7 +6,7 @@ authors: Jacob Hansen, Christian Cmehil-Warn
 ---
 
 
-## Lost in the Loss
+## Loss and Over-fitting
 
 Loss is the primary way of measuring progress when training deep learning models. The higher the loss value the worse the model performs, so when training the model, the loss should be decreasing. However, the actual loss values _depend greatly_ on the deep learning model's task.
 
@@ -22,7 +22,7 @@ Picture from [here](https://medium.com/greyatom/what-is-underfitting-and-overfit
 
 
 
-## Exploring the Loss Landscape
+## Loss Landscapes Informing Architecture
 
 A loss landscape visualizes the loss function across different sets of parameters. Given the potentially millions of parameters, the dimensions of the landscape are reduced. The visualization subsets the landscape, often the subset where a trained model ends up. 
 
