@@ -31,7 +31,7 @@ A loss landscape is a visualization of the loss function where each point is the
 
 ![]({{ site.url }}/public/images/2022-12-09-loss-landscapes/visualizing-loss.png)
 
-When looking at a loss landscape, the local minima of the function are very apparent as well as how sharp they are. While an initial intuition might be that sharp minima makes the model easier to train because the minima can be found faster, in fact, sharper minima indicate that the model is less generalizable (ie more overfit) models that are less robust in real would situations.
+When looking at a loss landscape, the local minima of the function are very apparent as well as how sharp they are. Sharper minima indicate that the model is less generalizable (ie more overfit) models that are less robust in real would situations.
 
 The shape of loss landscapes near the final minima are completely dependent on what optimizer the model uses. Some research has found that added skip connections results in a much smoother and easier to navigate loss landscape (https://arxiv.org/abs/1712.09913). Other new research has found that training on smaller batches of data results in models ending up in minima with a much wider "opening" at the top of the descent, resulting in better performace on unseen data. (https://arxiv.org/abs/1609.04836) 
 
