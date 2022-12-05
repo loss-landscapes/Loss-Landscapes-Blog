@@ -2,14 +2,14 @@
 title:               The ICLR Blog Track
 tagline:             ''
 description:         'For short-term, peer-sourced tests of time, generalizations, specializations, reproductions, etc.!'
-url:                 https://iclr-blog-track.github.io
-baseurl:             ''
+url:                 https://loss-landscapes.github.io/Loss-Landscapes-Blog
+baseurl:             'https://loss-landscapes.github.io/Loss-Landscapes-Blog'
 paginate:            30
 permalink:           pretty
 
 # github
 github:
-  repo: https://github.com/iclr-blog-track/iclr-blog-track.github.io
+  repo: https://github.com/loss-landscapes/Loss-Landscapes-Blog
 
 exclude: [.github/, docker/]
 
