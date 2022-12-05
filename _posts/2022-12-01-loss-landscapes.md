@@ -17,7 +17,7 @@ For example, a classification task might use cross-entropy loss, which is calcul
 
 Another case where loss cannot be compared between models is when they use different optimizers. As shown in the charts below, its possible for a model with a lower loss and higher training accuracy to have a a worse test accuracy than a model with higher loss and lower training accuracy. Even though the dark green model has "better" training measures, its a model with over-fitting issues.
 
-![]({{ site.url }}/public/images/2022-12-09-loss-landscapes/loss-vs-accuracy.png)
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/loss-vs-accuracy.png)
 
 Given that deep learning models are heavily over-parameterized, over-fitting is a serious concern. The above example shows that a more robust and generalizable model can have a higher loss; however, even validation accuracy has its limits as a measure when a model is going to be deployed to the real world. However, there's an important tool in understanding a model's generalizability: loss landscapes.
 
@@ -29,7 +29,7 @@ Given that deep learning models are heavily over-parameterized, over-fitting is 
 A loss landscape is a visualization of the loss function where each point is the loss of a model with a different set of parameters. Given that deep learning models often have thousands, if not millions, of parameters, the visualization is made after dimensionality reduction. Also to note that the visualizations are a subset of the landscape, often where a trained model ends up. 
 
 
-![]({{ site.url }}/public/images/2022-12-09-loss-landscapes/visualizing-loss.png)
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png)
 
 In loss landscapes, the local minima of the function are very apparent as well as how sharp they are. Sharper minima indicate that the model is less generalizable (ie more overfit) models that are less robust in real would situations.
 
@@ -37,7 +37,7 @@ The shape of loss landscapes near the final minima are completely dependent on w
 
 In fact, recent literature has found great success in designing optimizers around finding smoother areas of the loss landscape. Designed by reserachers at Google, Sharpness-Aware Minimization, or SAM, is an optimizer that minimizes both loss and loss sharpness. While more computationally expensive, the model trained achieved state of the art results on image labeling benchmarks.
 
-![]({{ site.url }}/public/images/2022-12-09-loss-landscapes/our-sam.png)
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/our-sam.png)
 
 Loss landscapes are an important tool in making informed decisions about model architecture for generalization. Even if models don't seem to be improving on testing or validation sets, checking the loss landscape can be important to checking for overall generalizability. 
 
