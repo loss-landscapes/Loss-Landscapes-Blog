@@ -21,7 +21,10 @@ Another case where loss cannot be compared between models is when they use diffe
 
 Given that deep learning models are heavily over-parameterized, over-fitting is a serious concern. The above example shows that a more robust and generalizable model can have a higher loss; however, even validation accuracy has its limits as a measure when a model is going to be deployed to the real world. However, there's an important tool in understanding a model's generalizability: loss landscapes.
 
-![Picture from https://medium.com/greyatom/what-is-underfitting-and-overfitting-in-machine-learning-and-how-to-deal-with-it-6803a989c76]({{ site.url }}/public/images/2022-12-01-loss-landscapes/overfitting.png)
+
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/overfitting.png)
+Picture from https://medium.com/greyatom/what-is-underfitting-and-overfitting-in-machine-learning-and-how-to-deal-with-it-6803a989c76
+
 
 
 ## Exploring the Loss Landscape
