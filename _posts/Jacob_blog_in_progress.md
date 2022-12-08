@@ -28,6 +28,9 @@ The world of machine learning commonly reffered to this as overfitting. After a 
 Though the models above contain far sufficiet paramaters to overfit, they cannot be overcome by regularization techniques alone. As seen below, increasing the regularization does not make up for the difference. 
 </br></br> 
 **ExampleImage**
+</br></br> 
+## The Value of Loss Analysis 
+
 
 </br></br> 
 ## Intro to Loss Landscapes
@@ -41,8 +44,8 @@ As seen in the example below, even modifications to the distance to traverse can
 **IMAGEofLOSSchanging**
 </br></br> 
 Despite this limitation, the loss landscape can still be a useful tool for understanding how the model is training and identifying potential problems or issues with the optimization process. 
-For example, a smoothly-varying loss landscape may indicate that the model is training well and that the optimization algorithm is making progress towards a good solution. 
-In contrast, a rugged or highly-irregular loss landscape may indicate that the optimization algorithm is struggling to find a good solution, and may require further tuning or adjustments.
+For example, in wide exploration techniques, a smoothly-varying loss landscape may indicate that the model is training well and that the optimization algorithm is making progress towards a good solution while a rugged or highly-irregular loss landscape may indicate that the optimization algorithm is struggling to find a good solution, and may require further tuning or adjustments. </br></br> 
+Similar to any scientific method, or statistical test, the methods one chooses determine how to analyze and compare loss landscapes between training repetitions. 
 
 ## Methods for Loss Landscapes
 
