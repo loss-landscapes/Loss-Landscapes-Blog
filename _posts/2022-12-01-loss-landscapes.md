@@ -33,7 +33,7 @@ In loss landscapes, the local minima of the function are very apparent as well a
 
 The shape of loss landscapes near the final minima completely depends on what optimizer the model uses. Some [research](https://arxiv.org/abs/1712.09913) found that added skip connections results in a much smoother loss landscape. Other new [research](https://arxiv.org/abs/1609.04836)  has found that training on smaller batches of data results in models ending up in minima with a much wider "opening" at the top of the descent, resulting in better performace on unseen data. 
 
-In fact, recent recent found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, is an optimizer that minimizes both loss and loss sharpness. While more computationally expensive, the model trained achieved state of the art results on image labeling benchmarks.
+In fact, recent research found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, is an optimizer that minimizes both loss and loss sharpness. While more computationally expensive, the model trained achieved state of the art results on image labeling benchmarks.
 
 ![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/our-sam.png)
 
