@@ -16,7 +16,7 @@ Deep learning differs from traditional optimization in that the process for obta
 For example, the figure below depicts a vision transformer trained with two different optimization techniques. Despite one model having substantially lower loss and higher training accuracy, its test accuracy is 10% lower. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/loss-vs-accuracy.png" width="300" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/loss-vs-accuracy.png" width="900" />
 </p>
  
 This problem initially appears to be due to overfitting. Classical machine learning describes overfitting as the point in training where the model begins to have high training performance by learning features specific to the training set. Overfitting is typically overcome by adding regularization. 
