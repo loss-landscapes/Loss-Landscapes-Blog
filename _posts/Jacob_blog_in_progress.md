@@ -43,12 +43,7 @@ Mathematically, this can be represented as follows:
 
 
 </br></br> 
-## The Value of Loss Analysis 
-
-</br></br> 
-
-</br></br> 
-## Intro to Loss Landscapes
+## Heuristics for Loss Analysis
 The loss landscape graphically represents the model's loss as a function of its parameters, which can provide insight into the training process of the model and its final test performance. 
 The loss landscape is typically visualized as a one or two-dimensional plot, an approximation of the true high-dimentional function landscape. Thus, the loss landscape only represents a small slice of the full function space, 
 with the dimensions and axes of the plot being determined by the specific parameters that are being visualized. 
@@ -59,24 +54,26 @@ As seen in the example below, even modifications to the distance to traverse can
 **IMAGEofLOSSchanging**
 </br></br> 
 Despite this limitation, the loss landscape can still be a useful tool for understanding how the model is training and identifying potential problems or issues with the optimization process. 
-For example, in wide exploration techniques, a smoothly-varying loss landscape may indicate that the model is training well and that the optimization algorithm is making progress towards a good solution while a rugged or highly-irregular loss landscape may indicate that the optimization algorithm is struggling to find a good solution, and may require further tuning or adjustments. </br></br> 
-Similar to any scientific method, or statistical test, the methods one chooses determine how to analyze and compare loss landscapes between training repetitions. 
+For example, wide exploration techniques with large batch sizes may be used to evaluate data augmentation techniques. A smoothly loss landscape likely indicates that the dataset is well patched and continous. In contrast, narrow loss exploration techniques provides insight into hyperparameterization, evaluating how fast a model is converging and to what type of solution.   </br></br> 
 
-## Methods for Loss Landscapes
-
-
-
-
-
-
+When designing loss plots, we recommend considering traversal strategies, generation metrics, and exploration distance. Furthermore, it is important develop interpretable plot scaling and color to ensure proper evaluation of the loss landscapes. Here, demonstrate these considerations when using loss-landscapes as provided by {Marcello de Bernardi}[https://github.com/marcellodebernardi/loss-landscapes/blob/8d3461045f317bc0f4ba35e552fb22f3242647ff/loss_landscapes/main.py] (pip package loss-landscapes). 
 </br></br> 
-While loss landscapes have immense value, their python libraries 
-are finicky. The original paper for [Visualizing the Loss Landscapes of Neural Networks](https://arxiv.org/pdf/1712.09913.pdf) 
-published a github repository located [here](https://github.com/tomgoldstein/loss-landscape). Rather, we rec
-</br></br> 
+__Traversal Strategies__ </br> 
+A loss landscape traversal strategy, as defined here, determines how to vary the parameters of the model. 
+
+Topics to Cover 
+ -Plot Strategy
+ -Uniform Generation Metrics
+ -Initial Base Plot Exploration
+ -Interpretable Scale and Color
+ -Model Traversal Strategies
+ -Python Packages
 
 
-## Heuristics for Loss Landscapes
+
+
+
+
 
 
 ## Further Exploration of Loss Landscapes
