@@ -42,7 +42,17 @@ To gain an intuition on how SAM works, SAM directs the model training by reparam
 
 The geometry of the parameter space can be changed by choosing a different reparametrization $g(\theta)$, resulting in a new set of parameters $\theta'$ for the function $f(x)$. SAM defines the reparametrization such that the loss computed from which to step from is derived from a local maximum. The significance of this reparametrization is best descrbribed visually.
 
-________________________________ADD SAM GRAPHICS________________________________
+Let’s say our model wandered into a sharp minima, we start by computing the gradient as usual, which would typically lead us to oscillate in the current minima (even with momentum). 
+
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-1.png)
+
+So, we then move the opposite direction, scaled by a factor called rho. 
+
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-2.png)
+
+Last, we use the gradient calculated at the second location to step from our original location. This effectively uses the sharpness of the surrounding landscape to force it to new areas. 
+
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-3.png)
 
 
 Thus, by changing the geometry of the parameter space to smoothen out local minima, the model more easily identifies new regions of the loss landscape that may be more generalizable and higher performing. 
