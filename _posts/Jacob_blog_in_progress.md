@@ -82,14 +82,24 @@ Last, plots must be graphed using the same scale and color gradients. Even sligh
 **scale.png**
 </br> </br>
 
-
 ## Loss Landscapes for Strategical Model Improvement
+Small model hyperparametrization can quickly take place by training many models, but larger deep learning models often take significant compute. Thus, we propose using loss landscapes information early in training for strategic training plans. The first hyperparameter to tune is the learning rate. When training a Vision Transformer on various learning rates, we observed that smaller learning rates led the model to get stuck in local minima, while large learning rates prevent the model from converging. As seen in the plot below, the loss landscapes similarly reflect these observations. 
+**lr.png**
+From these results, we can easily anticipate learning rates that are set too large, as the model fails to explore plausable paths and has a non-decreasing minima with a completely flat loss landscape. We can not easily anticipate when the learning rates are too small, as the above plot may not distinguish early convergence with a local minima with exploring a deep solution.
+</br> </br>
+Thus, we analyzed how the plot landscape evolves throughout training with and without SAM. Below, we see that SAM explores the loss landscape with substantially more wide minima. 
+
+**training.png**
+
+Additionally, the loss pattern of SAM can be distinguished from an improperly scaled training loss landscape with the base optimizer by the edge values. In the base optimizer, AdamW, the values return to the loss of a randomly initialized model (loss ~6). In SAM, the loss landscape is wide, and the edge loss values substantially decrease relative to the initial loss. Interestingly, it is not until the model is converging on a final solution that the loss for the edge conditions begin to increase. We speculate that this curling effect is due a sign of the model beginning to overfit the data.
 
 
+Last, we found an interesting observation that small values of rho (the influence factor) with SAM still led to a remarkable improvement of the model over the base optimizer, but yet a substantially sharper loss landscape in the end. As seen below, SAM trained with rho = 1 had a much sharper loss landscape than the base optimizer. 
 
+**rho.png**
 
+Furthermore, the test accuracy of the model trained with SAM rho = 1 was closer in performance to SAM trained with rho = 5, than it was to the base optimizer. 
 
+**perf.png**
 
-
-
-
+Thus, we see how the final final training landscape of a model does not tell the full story. We anticipate the most important use of loss analysis for large models will be in hyperparamater tuning and mid-training analysis. As larger models are being trained, expertise in the loss landscape will grow in importance. We hope this blog provides a great resource for understanding how to plot, interperate, and use loss landscapes for improving model training. 
