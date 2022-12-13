@@ -18,10 +18,7 @@ This problem initially appears to be due to overfitting. Classical machine learn
 </br></br> 
 Though the models above contain far sufficiet paramaters to overfit, they cannot be overcome by regularization techniques alone. As seen below, increasing the regularization (as either weight decay or gaussian noise) did not improve the model test performance. 
 </br></br> 
-Rather, the model was improved using local loss information to smoothen the loss landscape in a process called Sharpness Aware Minimization.
-**ExampleImage**
-
-
+Rather, the model was improved using local loss information to smoothen the loss landscape in a process called Sharpness Aware Minimization (SAM). Training with insight to the loss landscape provides many approaches to improving deep learning models, though it is critical to develop a fundamental understanding of loss landscapes and SAM.  
 
 </br></br> 
 ## Loss Landscapes
