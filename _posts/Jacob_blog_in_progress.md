@@ -55,11 +55,18 @@ As seen in the example below, even modifications to the distance to traverse can
 </br></br> 
 Despite this limitation, the loss landscape can still be a useful tool for understanding how the model is training and identifying potential problems or issues with the optimization process. 
 For example, wide exploration techniques with large batch sizes may be used to evaluate data augmentation techniques. A smoothly loss landscape likely indicates that the dataset is well patched and continous. In contrast, narrow loss exploration techniques provides insight into hyperparameterization, evaluating how fast a model is converging and to what type of solution.   </br></br> 
+</br></br> 
+To identify loss landscape plot strategies that best reveal characteristics of interest, it is important to first identify a test case and as base model. We started with the base optimizer, AdamW, and a Vision Transformer. After initial tuning, develop a loss plot strategy that reflects an average case. A single plot by itself can not be used to gain information, rather provide a base condition. By generating a plot representing an average case (a relatively smooth, but variable loss landscape), the test case can then be evaluated using the same strategy to validate that differences are observed. If no differences are observed, reconsider the plot strategy. If the differences are unexpected, then also do so, but with a new test case. </br></br> 
 
 When designing loss plots, we recommend considering traversal strategies, generation metrics, and exploration distance. Furthermore, it is important develop interpretable plot scaling and color to ensure proper evaluation of the loss landscapes. Here, demonstrate these considerations when using loss-landscapes as provided by {Marcello de Bernardi}[https://github.com/marcellodebernardi/loss-landscapes/blob/8d3461045f317bc0f4ba35e552fb22f3242647ff/loss_landscapes/main.py] (pip package loss-landscapes). 
-</br></br> 
+
+</br></br>
 __Traversal Strategies__ </br> 
-A loss landscape traversal strategy, as defined here, determines how to vary the parameters of the model. 
+A loss landscape traversal strategy, as defined here, determines how to vary the parameters of the model in order identify the loss of nearby model paramater settings. One could arbitrarily increase the loss by adding noise to all the paramaters of the model, but this reveals little about the model properties other than it's robustness to parameter pertubation. Thus, more powerful techniques include selecting specific axis of pertubation applied either to the whole model, layers individually, or with a filter strategy developed by \[ref loss for NN paper\]. In the plots below, we compare these three traversal strategies on a Vision Transformer trained with a small learning rate, causing it to quickly converge into a poor local minima. </br> 
+**Traversal.png**
+</br> 
+As seen above, we found that pertubation directions applied to the model as a whole were more reliable for evaluting vision transformers. In contrast, layer or filter pertubation techniques often reveal more information for highly structured models stuch as CNN's. 
+</br> </br> 
 
 Topics to Cover 
  -Plot Strategy
