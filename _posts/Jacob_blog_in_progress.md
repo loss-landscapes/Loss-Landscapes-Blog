@@ -37,21 +37,16 @@ Image from [Foret et al](https://arxiv.org/abs/2010.01412) Depecting loss landsc
 ## Sharpness Aware Minimization (SAM)
 Sharpness Aware Minimization (SAM) analyzes the geometry of the parameter space induced by the symmetries of deep learning models, allowing for the identification of regions of the loss landscape where the minima are flatter. This information can be used to guide the training process and improve the performance of the model. SAM does not just identify when a good solution is reached, but forces the model in directions with smoother loss landscapes. 
 </br></br> 
-SAM directs the model training by reprametrizing the loss function. Let $f(x)$ be a function with parameters $\theta$, and let $g(\theta)$ be a reparametrization of $f(x)$. The relationship between $f(x)$ and $g(\theta)$ is given by:
-
+To gain an intuition on how SAM works, SAM directs the model training by reparametrizing the loss function. Let $f(x)$ be a function with parameters $\theta$, and let $g(\theta)$ be a reparametrization of $f(x)$. The relationship between $f(x)$ and $g(\theta)$ is given by:
+</br> 
+<p align="center">
 $g(\theta) = f(x(\theta))$
-
-The geometry of the parameter space can be changed by choosing a different reparametrization $g(\theta)$, resulting in a new set of parameters $\theta'$ for the function $f(x)$. This allows for the analysis of the relationship between flatness and generalization in deep learning models.
-
-
-SAM also allows for the reparametrization of functions, which can be used to change the geometry of the parameter space and identify new regions of the loss landscape that may be more conducive to good generalization.
+</p>
+</br> 
+The geometry of the parameter space can be changed by choosing a different reparametrization $g(\theta)$, resulting in a new set of parameters $\theta'$ for the function $f(x)$. SAM defines the reparametrization such that the loss computed from which to step from is derived from a local maximum. The significance of this reparametrization is best descrbribed graphically. ________________________________ADD SAM GRAPHICS________________________________
 
 
-
-
-
-
-Mathematically, this can be represented as follows:
+Thus, by changing the geometry of the parameter space to smoothen out local minima, the model more easily identifies new regions of the loss landscape that may be more generalizable and higher performing. 
 
 
 </br></br> 
