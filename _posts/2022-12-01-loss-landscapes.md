@@ -36,7 +36,7 @@ More recent research has also investigated how loss landscapes can improve model
 
 <p align="center">
 <img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png" width="600" />
-Image from [Foret et al](https://arxiv.org/abs/2010.01412) Depicting loss landscapes before (left) and after (right) training with SAM 
+Image from <a href="https://arxiv.org/abs/2010.01412">Foret et al</a> Depicting loss landscapes before (left) and after (right) training with SAM 
 </p>
  
 ## Sharpness Aware Minimization (SAM)
