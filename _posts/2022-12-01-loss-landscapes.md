@@ -75,7 +75,7 @@ Since the loss landscape selects only a slice of the true function space, it is 
 As seen in the example below, even modifications to the distance to traverse can lead to large, unintuitive changes in the loss landscape visualization. Here, we'd expect the loss landscape traversed over a 2x2 traversal grid would encompass an identical 1x1 traversal grid within the graph. Unintuitively, we see that changing the size of the traversal grid leads to a new slice and exploration that is substantially smoother. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/diff-plane.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/diff_plane.png" width="900" />
 </p>
 
 Despite this limitation, the loss landscape can still be a useful tool for understanding how the model is training and identifying potential problems or issues with the optimization process. 
