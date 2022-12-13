@@ -24,16 +24,14 @@ Picture from [here](https://medium.com/greyatom/what-is-underfitting-and-overfit
 
 ## Loss Landscapes Informing Architecture
 
-A loss landscape visualizes the loss function across different sets of parameters. Given the potentially millions of parameters, the dimensions of the landscape are reduced. The visualization subsets the landscape, often the subset where a trained model ends up. 
-
+The loss landscape **graphically** represents how the model's loss function changes as the model parameters change. Exmining the loss landscape's width and smoothness provides meaningful insight into model performance.
 
 ![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png)
 
-In loss landscapes, the local minima of the function are very apparent as well as how sharp they are. Sharper minima indicate that the model is less generalizable (ie more overfit) models that are less robust in real would situations.
+Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution ([Keskar et al.](https://arxiv.org/abs/1609.04836)). Keskar et al explores how optimizing CNNs on small batches of data (e.g. stochastic gradient descent) vs large batches of data affect the loss landscape of models. They find that small-batch training results in loss landscapes that have a minima with a wider opening at the top, resulting in more generalizable models
 
-The shape of loss landscapes near the final minima completely depends on what optimizer the model uses. Some [research](https://arxiv.org/abs/1712.09913) found that added skip connections results in a much smoother loss landscape. Other new [research](https://arxiv.org/abs/1609.04836)  has found that training on smaller batches of data results in models ending up in minima with a much wider "opening" at the top of the descent, resulting in better performace on unseen data. 
 
-In fact, recent research found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, is an optimizer that minimizes both loss and loss sharpness. While more computationally expensive, the model trained achieved state of the art results on image labeling benchmarks.
+Recent research ([Foret et al](https://arxiv.org/abs/2010.01412)) has found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, is an optimizer that minimizes both loss and loss sharpness. While more computationally expensive, the model trained achieved state of the art results on image labeling benchmarks.
 
 ![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/our-sam.png)
 
