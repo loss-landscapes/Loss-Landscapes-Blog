@@ -16,7 +16,7 @@ For example, the figure below depicts a vision transformer trained with two diff
 </br>**ExampleImage**</br></br>
 This problem initially appears to be due to overfitting. Classical machine learning describes overfitting as the point in training where the model begins to have high training performance by learning features specific to the training set. Overfitting is typically overcome by adding regularization. 
 </br></br> 
-Though the models above contain far sufficiet paramaters to overfit, they cannot be overcome by regularization techniques alone. As seen below, increasing the regularization (as either weight decay or gaussian noise) did not improve the model test performance. 
+Though the models above contain far sufficiet paramaters to overfit, they cannot be overcome by regularization techniques alone. As seen below, increasing the regularization (as either weight decay or gaussian noise) did not improve the model test performance.  
 </br></br> 
 Rather, the model was improved using local loss information to smoothen the loss landscape in a process called Sharpness Aware Minimization (SAM). Training with insight to the loss landscape provides many approaches to improving deep learning models, though it is critical to develop a fundamental understanding of loss landscapes and SAM.  
 
