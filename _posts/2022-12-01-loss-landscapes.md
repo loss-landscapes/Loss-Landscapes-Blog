@@ -26,13 +26,13 @@ Picture from [here](https://medium.com/greyatom/what-is-underfitting-and-overfit
 
 The loss landscape **graphically** represents how the model's loss function changes as the model parameters change. Exmining the loss landscape's width and smoothness provides meaningful insight into model performance.
 
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.jpeg)
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png)
 
 Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution ([Keskar et al.](https://arxiv.org/abs/1609.04836)). Keskar et al explores how optimizing CNNs on small batches of data (e.g. stochastic gradient descent) vs large batches of data affect the loss landscape of models. They find that small-batch training results in loss landscapes that have a minima with a wider opening at the top, resulting in more generalizable models
 
 
 Recent research ([Foret et al](https://arxiv.org/abs/2010.01412)) has found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, is an optimizer that minimizes both loss and loss sharpness. While more computationally expensive, a ResNet-101 model trained on ImageNet using SAM had a 3.3% error decrease compared to a equivalent model without SAM. Similarly our Visual Transformer model showed a 10% improvement on ImageNet-100 using SAM.
 
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/our-sam.png)
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/our-sam.jpeg)
 
 
