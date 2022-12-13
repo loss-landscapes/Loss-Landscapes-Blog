@@ -9,8 +9,7 @@ authors: Jacob Hansen, Christian Cmehil-Warn
 The loss landscape graphically represents the model's loss function, a measure of how well the model can make predictions on a given dataset. Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution \[ref...\]. Furthermore, recent optimization methods leverage local loss information to traverse the loss landscape and lead to drastic training improvements \[ref SAM\]. Most papers use loss visualization to validate model performance and provide comparison between solutions. In contrast, here we describe methods and heuristics for analyzing the loss landscape with the intention to improve model architecture, adjust training hyperparameters, and gain insight into the training process of large models. 
 </br></br>
 ## A Deeper Background Into Loss
-In deep learning, loss measures how well a model's predictions match the ground truth or expected output for a given input data. 
-By minimizing loss through the optimization process, we improve the model's ability to make accurate predictions on unseen data. 
+In deep learning, the loss function used in the loss landscape measures the difference between the model's predicted output and the true output. Loss metrics, such as mean squared error or cross-entropy loss, calculate the difference in ways important to the prediction power of the problem. Then, gradient descent algorithms used to train the model adjusts the model's parameters in order to minimize this loss function, ultimately leading to a model that is able to make accurate predictions. Importantly, by minimizing loss through the optimization process, we improve the model's ability to make accurate predictions on unseen data. 
 </br></br>
 Deep learning differs from traditional optimization in that the process for obtaining a minima matters more than the actual value of the minima acheived.
 For example, the figure below depicts a vision transformer trained with two different optimization techniques. Despite one model having substantially lower loss and higher training accuracy, its test accuracy is 10% lower. 
@@ -26,25 +25,17 @@ Rather, the model was improved using local loss information to smoothen the loss
 
 </br></br> 
 ## Loss Landscapes
+After training a model, one can visualize the loss landscape by using various techniques that reduce the high dimensionality of the model's parameter space and the data space to a two-dimensional surface. This is known as a loss landscape. The loss landscape **graphically** represents how the model's loss function changes as the model parameters change. The graph is centered on the optimal model parameters, resulting distinctive "valley" shape, with larger loss values as the paramaters are shifted away from the optimal values. The shift away from the optimal paramaters can be determined through many different traversal strategies, but in any case, the resulting plot is a dimentional reduction of the true parameter space of the model. Thus, examining the loss landscape's width, smoothness, and shape provides meaningful insight into model performance in a simplified representation of the true problem defined by the data. 
+</br></br> 
+Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution ([Keskar et al.](https://arxiv.org/abs/1609.04836)). Keskar et al explores how optimizing CNNs on small batches of data (e.g. stochastic gradient descent) vs large batches of data affect the loss landscape of models. They find that small-batch training results in loss landscapes that have a minima with a wider opening at the top, resulting in more generalizable models
+**Image from Keskar et al.**
+</br></br> 
 
+More recent research has also investigated how loss landscapes can improve model training. By developing a more generalizable model early in training, the final solution reached will both be more generalizable as well as more powerful. Work ([Foret et al](https://arxiv.org/abs/2010.01412)) has found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, minimizes both loss and loss sharpness. This directly causes the loss landscape to be smoother while training, and the results are impressive! A ResNet-101 model trained on ImageNet using SAM had a 3.3% error decrease compared to a equivalent model without SAM. Similarly our Visual Transformer model showed a 10% improvement on ImageNet-100 using SAM as seen in the image below. </br>
 
-
-</br></br>
-The loss landscape is typically plotted on a graph, with the x-axis representing the number of training iterations (also known as epochs) and the y-axis representing the value of the loss function. The resulting graph will typically have a distinctive "valley" shape, with the loss decreasing as the model is trained and reaching a minimum at the end of training. This minimum value is the point at which the model has achieved the best possible performance on the given dataset.
-</br></br>
-The math behind the loss landscape involves a number of complex concepts from machine learning and optimization theory. At a high level, the loss function used in the loss landscape is typically a measure of the difference between the model's predicted output and the true output. This difference is often quantified using a metric such as mean squared error or cross-entropy loss. The gradient descent algorithm used to train the model then adjusts the model's parameters in order to minimize this loss function, ultimately leading to a model that is able to make accurate predictions.
-</br></br>
-After training a machine learning model, one can visualize the loss landscape by using various techniques that reduce the high dimensionality of the model's parameter space and the data space to a two-dimensional surface. One such technique is 1-dimensional linear interpolation, which involves projecting the high-dimensional space onto a one-dimensional line and then interpolating the points on this line to create a two-dimensional surface.
-</br></br>
-Another technique is to use contour plots, which involve dividing the two-dimensional surface into a series of concentric contours, each representing a different level of the loss function. This creates a visual representation of the shape of the loss landscape and allows one to see how the loss changes as a function of the model's parameters.
-</br></br>
-Finally, one can also use random directions to visualize the loss landscape. This involves selecting a random direction in the high-dimensional space and then projecting the points onto this direction to create a two-dimensional surface. This can provide a different perspective on the loss landscape and can help to identify areas of the space where the loss is particularly high or low.
-</br></br>
-Overall, these techniques can provide valuable insights into the performance of a machine learning model and can help to identify potential improvements or issues with the model.
-</br></br>
-
-
-</br></br> </br>
+![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png)
+Image from [Foret et al](https://arxiv.org/abs/2010.01412) Depecting loss landscapes before (left) and after (right) training with SAM </br>
+</br>
 
 ## Sharpness Aware Minimization (SAM)
 Sharpness Aware Minimization (SAM) analyzes the geometry of the parameter space induced by the symmetries of deep learning models, allowing for the identification of regions of the loss landscape where the minima are flatter. This information can be used to guide the training process and improve the performance of the model. SAM does not just identify when a good solution is reached, but forces the model in directions with smoother loss landscapes. 
