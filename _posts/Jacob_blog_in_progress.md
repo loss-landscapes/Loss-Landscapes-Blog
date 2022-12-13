@@ -5,16 +5,8 @@ title: "Loss Landscapes"
 tags: [optimization, generalizability, loss]
 authors: Jacob Hansen, Christian Cmehil-Warn
 ---
-
-### Thoughts on Previous Parts: 
-"Simply put, the higher the value the worse the model is..." > Not quite true. But we should bring up the idea that this is typically how loss is thought of. 
-</br> 
-</br> This still feels like a formal paper. Sentences need to call ATTENTION! LOOK AT ME! And here is a exmaple of why: \<pic/plot\>
-<\br></br> Last thought, every word needs to count. eg \<When looking at a..\> replaced with \<in a...\>. No wasted characters!
-
 # Visualizing the Loss Landscape 
-The loss landscape graphically represents the model's loss function, a measure of how well the model can make predictions on a given dataset. Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution \[ref...\]. 
-Additionally, recent optimization methods levereging local loss information have led to drastic training improvements for many deep learning models \[ref SAM\]. Most papers use loss visualization to validate model performance and provide comparison between solutions. In contrast, here we describe methods and heuristics for analyzing the loss landscape with the intention to improve models. 
+The loss landscape graphically represents the model's loss function, a measure of how well the model can make predictions on a given dataset. Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution \[ref...\]. Furthermore, recent optimization methods leverage local loss information to traverse the loss landscape and lead to drastic training improvements \[ref SAM\]. Most papers use loss visualization to validate model performance and provide comparison between solutions. In contrast, here we describe methods and heuristics for analyzing the loss landscape with the intention to improve model architecture, adjust training hyperparameters, and gain insight into the training process of large models. 
 </br></br>
 ## A Deeper Background Into Loss
 In deep learning, loss measures how well a model's predictions match the ground truth or expected output for a given input data. 
@@ -23,14 +15,37 @@ By minimizing loss through the optimization process, we improve the model's abil
 Deep learning differs from traditional optimization in that the process for obtaining a minima matters more than the actual value of the minima acheived.
 For example, the figure below depicts a vision transformer trained with two different optimization techniques. Despite one model having substantially lower loss and higher training accuracy, its test accuracy is 10% lower. 
 </br>**ExampleImage**</br></br>
-The world of machine learning commonly reffered to this as overfitting. After a certain point, overtraining models lead to poorer performance on unseen data. Overfitting typically occurs when a model has too many parameters relative to the amount of training data available and the model learns patterns in the training data that do not generalize and decrease performance.
+This problem initially appears to be due to overfitting. Classical machine learning describes overfitting as the point in training where the model begins to have high training performance by learning features specific to the training set. Overfitting is typically overcome by adding regularization. 
 </br></br> 
-Though the models above contain far sufficiet paramaters to overfit, they cannot be overcome by regularization techniques alone. As seen below, increasing the regularization does not make up for the difference. 
+Though the models above contain far sufficiet paramaters to overfit, they cannot be overcome by regularization techniques alone. As seen below, increasing the regularization (as either weight decay or gaussian noise) did not improve the model test performance. 
 </br></br> 
+Rather, the model was improved using local loss information to smoothen the loss landscape in a process called Sharpness Aware Minimization.
 **ExampleImage**
+</br></br> 
+## Sharpness Aware Minimization (SAM)
+Sharpness Aware Minimization (SAM) analyzes the geometry of the parameter space induced by the symmetries of deep learning models, allowing for the identification of regions of the loss landscape where the minima are flatter. This information can be used to guide the training process and improve the performance of the model. SAM does not just identify when a good solution is reached, but forces the model in directions with smoother loss landscapes. 
+</br></br> 
+SAM directs the model training by reprametrizing the loss function. Let $f(x)$ be a function with parameters $\theta$, and let $g(\theta)$ be a reparametrization of $f(x)$. The relationship between $f(x)$ and $g(\theta)$ is given by:
+
+$g(\theta) = f(x(\theta))$
+
+The geometry of the parameter space can be changed by choosing a different reparametrization $g(\theta)$, resulting in a new set of parameters $\theta'$ for the function $f(x)$. This allows for the analysis of the relationship between flatness and generalization in deep learning models.
+
+
+SAM also allows for the reparametrization of functions, which can be used to change the geometry of the parameter space and identify new regions of the loss landscape that may be more conducive to good generalization.
+
+
+
+
+
+
+Mathematically, this can be represented as follows:
+
+
 </br></br> 
 ## The Value of Loss Analysis 
 
+</br></br> 
 
 </br></br> 
 ## Intro to Loss Landscapes
@@ -39,7 +54,7 @@ The loss landscape is typically visualized as a one or two-dimensional plot, an 
 with the dimensions and axes of the plot being determined by the specific parameters that are being visualized. 
 </br></br> 
 Since the loss landscape selects only a slice of the true function space, it is essential to understand the various techniques for slicing as well as heuristics for improving loss landscape reliability and interpretability. 
-As seen in the example below, even modifications to the distance to traverse can lead to large, unexpected changes in the loss landscape visualization. 
+As seen in the example below, even modifications to the distance to traverse can lead to large, unintuitive changes in the loss landscape visualization. Here, we'd expect the loss landscape traversed over a 2x2 traversal grid would encompass an identical 1x1 traversal grid within the graph. Unintuitively, we see that changing the size of the traversal grid leads to a new slice and exploration that is substantially smoother. 
 </br></br> 
 **IMAGEofLOSSchanging**
 </br></br> 
