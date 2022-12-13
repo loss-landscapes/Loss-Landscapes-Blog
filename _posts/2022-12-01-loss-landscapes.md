@@ -36,9 +36,9 @@ More recent research has also investigated how loss landscapes can improve model
 
 <p align="center">
 <img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png" width="900" />
-</p>
 Image from [Foret et al](https://arxiv.org/abs/2010.01412) Depecting loss landscapes before (left) and after (right) training with SAM 
-
+</p>
+ 
 ## Sharpness Aware Minimization (SAM)
 Sharpness Aware Minimization (SAM) analyzes the geometry of the parameter space induced by the symmetries of deep learning models, allowing for the identification of regions of the loss landscape where the minima are flatter. This information can be used to guide the training process and improve the performance of the model. SAM does not just identify when a good solution is reached, but forces the model in directions with smoother loss landscapes. 
 
@@ -88,6 +88,7 @@ When designing loss plots, we recommend considering traversal strategies, genera
 
 __Traversal Strategies__ 
 A loss landscape traversal strategy, as defined here, determines how to vary the parameters of the model in order identify the loss of nearby model paramater settings. One could arbitrarily increase the loss by adding noise to all the paramaters of the model, but this reveals little about the model properties other than it's robustness to parameter pertubation. Thus, more powerful techniques include selecting specific axis of pertubation applied either to the whole model, layers individually, or with a filter strategy developed by \[ref loss for NN paper\]. In the plots below, we compare these three traversal strategies on a Vision Transformer trained with a small learning rate, causing it to quickly converge into a poor local minima.  
+
 <p align="center">
 <img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/traversal.png" width="900" />
 </p>
