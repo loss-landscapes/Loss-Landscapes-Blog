@@ -16,7 +16,7 @@ Deep learning differs from traditional optimization in that the process for obta
 For example, the figure below depicts a vision transformer trained with two different optimization techniques. Despite one model having substantially lower loss and higher training accuracy, its test accuracy is 10% lower. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/loss-vs-accuracy.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/loss-vs-accuracy.png" width="600" />
 </p>
  
 This problem initially appears to be due to overfitting. Classical machine learning describes overfitting as the point in training where the model begins to have high training performance by learning features specific to the training set. Overfitting is typically overcome by adding regularization. 
@@ -35,7 +35,7 @@ Previous work has shown that structure of the loss landscape foretells the gener
 More recent research has also investigated how loss landscapes can improve model training. By developing a more generalizable model early in training, the final solution reached will both be more generalizable as well as more powerful. Work ([Foret et al](https://arxiv.org/abs/2010.01412)) has found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, minimizes both loss and loss sharpness. This directly causes the loss landscape to be smoother while training, and the results are impressive! A ResNet-101 model trained on ImageNet using SAM had a 3.3% error decrease compared to a equivalent model without SAM. Similarly our Visual Transformer model showed a 10% improvement on ImageNet-100 using SAM as seen in the image below. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png" width="600" />
 Image from [Foret et al](https://arxiv.org/abs/2010.01412) Depicting loss landscapes before (left) and after (right) training with SAM 
 </p>
  
@@ -49,19 +49,19 @@ The geometry of the parameter space can be changed by choosing a different repar
 Let’s say our model wandered into a sharp minima, we start by computing the gradient as usual, which would typically lead us to oscillate in the current minima (even with momentum). 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-1.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-1.png" width="600" />
 </p>
 
 So, we then move the opposite direction, scaled by a factor called rho. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-2.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-2.png" width="600" />
 </p>
 
 Last, we use the gradient calculated at the second location to step from our original location. This effectively uses the sharpness of the surrounding landscape to force it to new areas. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-3.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-3.png" width="600" />
 </p>
 
 Thus, by changing the geometry of the parameter space to smooth out local minima, the model more easily identifies new regions of the loss landscape that may be more generalizable and higher performing. 
@@ -75,7 +75,7 @@ Since the loss landscape selects only a slice of the true function space, it is 
 As seen in the example below, even modifications to the distance to traverse can lead to large, unintuitive changes in the loss landscape visualization. Here, we'd expect the loss landscape traversed over a 2x2 traversal grid would encompass an identical 1x1 traversal grid within the graph. Unintuitively, we see that changing the size of the traversal grid leads to a new slice and exploration that is substantially smoother. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/diff_plane.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/diff_plane.png" width="600" />
 </p>
 
 Despite this limitation, the loss landscape can still be a useful tool for understanding how the model is training and identifying potential problems or issues with the optimization process. 
@@ -90,7 +90,7 @@ __Traversal Strategies__
 A loss landscape traversal strategy, as defined here, determines how to vary the parameters of the model in order identify the loss of nearby model parameter settings. One could arbitrarily increase the loss by adding noise to all the parameters of the model, but this reveals little about the model properties other than it's robustness to parameter perturbation. Thus, more powerful techniques include selecting specific axis of perturbation applied either to the whole model, layers individually, or with a filter strategy developed by \[ref loss for NN paper\]. In the plots below, we compare these three traversal strategies on a Vision Transformer trained with a small learning rate, causing it to quickly converge into a poor local minima.  
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/traversal.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/traversal.png" width="600" />
 </p>
 
 As seen above, we found that perturbation directions applied to the model as a whole were more reliable for evaluating vision transformers. In contrast, layer or filter perturbation techniques often reveal more information for highly structured models such as CNN's. 
@@ -101,14 +101,14 @@ After determining a traversal strategy, determine how far to traverse and the de
 __Plot Scaling and Coloring__ 
 Last, plots must be graphed using the same scale and color gradients. Even slight differences in the coloring can lead to misleading comparisons. For example, if we were to replot the graph from Traversal Strategies, we could artificially scale the loss plot to find what seems to be a deeper or sharper landscape. Forgetting to scale all plots similarly make it difficult to gain insight from plots. 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/scale.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/scale.png" width="600" />
 </p>
 
 ## Loss Landscapes for Strategic Model Improvement
 Small model hyperparameterization can quickly take place by training many models, but larger deep learning models often take significant compute. Thus, we propose using loss landscapes information early in training for strategic training plans. The first hyperparameter to tune is the learning rate. When training a Vision Transformer on various learning rates, we observed that smaller learning rates led the model to get stuck in local minima, while large learning rates prevent the model from converging. As seen in the plot below, the loss landscapes similarly reflect these observations. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/lr.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/lr.png" width="600" />
 </p>
 
 From these results, we can easily anticipate learning rates that are set too large, as the model fails to explore plausible paths and has a non-decreasing minima with a completely flat loss landscape. We can not easily anticipate when the learning rates are too small, as the above plot may not distinguish early convergence with a local minima with exploring a deep solution.
@@ -116,7 +116,7 @@ From these results, we can easily anticipate learning rates that are set too lar
 Thus, we analyzed how the plot landscape evolves throughout training with and without SAM. Below, we see that SAM explores the loss landscape with substantially more wide minima. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/training.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/training.png" width="600" />
 </p>
 
 Additionally, the loss pattern of SAM can be distinguished from an improperly scaled training loss landscape with the base optimizer by the edge values. In the base optimizer, AdamW, the values return to the loss of a randomly initialized model (loss ~6). In SAM, the loss landscape is wide, and the edge loss values substantially decrease relative to the initial loss. Interestingly, it is not until the model is converging on a final solution that the loss for the edge conditions begin to increase. We speculate that this curling effect is due a sign of the model beginning to overfit the data.
@@ -125,13 +125,13 @@ Additionally, the loss pattern of SAM can be distinguished from an improperly sc
 Last, we found an interesting observation that small values of rho (the influence factor) with SAM still led to a remarkable improvement of the model over the base optimizer, but yet a substantially sharper loss landscape in the end. As seen below, SAM trained with rho = 1 had a much sharper loss landscape than the base optimizer. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/rho.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/rho.png" width="600" />
 </p>
 
 Furthermore, the test accuracy of the model trained with SAM rho = 1 was closer in performance to SAM trained with rho = 5, than it was to the base optimizer. 
 
 <p align="center">
-<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/perf.png" width="900" />
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/perf.png" width="600" />
 </p>
 
 Thus, we see how the final final training landscape of a model does not tell the full story. We anticipate the most important use of loss analysis for large models will be in hyperparameter tuning and mid-training analysis. As larger models are being trained, expertise in the loss landscape will grow in importance. We hope this blog provides a great resource for understanding how to plot, interpolate, and use loss landscapes for improving model training. 
