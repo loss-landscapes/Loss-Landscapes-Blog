@@ -15,8 +15,10 @@ In deep learning, the loss function used in the loss landscape measures the diff
 Deep learning differs from traditional optimization in that the process for obtaining a minima matters more than the actual value of the minima acheived.
 For example, the figure below depicts a vision transformer trained with two different optimization techniques. Despite one model having substantially lower loss and higher training accuracy, its test accuracy is 10% lower. 
 
+<p align="center">
 <img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/loss-vs-accuracy.png" width="300" />
-
+</p>
+ 
 This problem initially appears to be due to overfitting. Classical machine learning describes overfitting as the point in training where the model begins to have high training performance by learning features specific to the training set. Overfitting is typically overcome by adding regularization. 
 
 Though the models above contain far sufficiet paramaters to overfit, they cannot be overcome by regularization techniques alone. As seen below, increasing the regularization (as either weight decay or gaussian noise) did not improve the model test performance.  
