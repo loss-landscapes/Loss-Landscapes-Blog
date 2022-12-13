@@ -21,7 +21,31 @@ Though the models above contain far sufficiet paramaters to overfit, they cannot
 </br></br> 
 Rather, the model was improved using local loss information to smoothen the loss landscape in a process called Sharpness Aware Minimization.
 **ExampleImage**
+
+
+
 </br></br> 
+## Loss Landscapes
+
+
+
+</br></br>
+The loss landscape is typically plotted on a graph, with the x-axis representing the number of training iterations (also known as epochs) and the y-axis representing the value of the loss function. The resulting graph will typically have a distinctive "valley" shape, with the loss decreasing as the model is trained and reaching a minimum at the end of training. This minimum value is the point at which the model has achieved the best possible performance on the given dataset.
+</br></br>
+The math behind the loss landscape involves a number of complex concepts from machine learning and optimization theory. At a high level, the loss function used in the loss landscape is typically a measure of the difference between the model's predicted output and the true output. This difference is often quantified using a metric such as mean squared error or cross-entropy loss. The gradient descent algorithm used to train the model then adjusts the model's parameters in order to minimize this loss function, ultimately leading to a model that is able to make accurate predictions.
+</br></br>
+After training a machine learning model, one can visualize the loss landscape by using various techniques that reduce the high dimensionality of the model's parameter space and the data space to a two-dimensional surface. One such technique is 1-dimensional linear interpolation, which involves projecting the high-dimensional space onto a one-dimensional line and then interpolating the points on this line to create a two-dimensional surface.
+</br></br>
+Another technique is to use contour plots, which involve dividing the two-dimensional surface into a series of concentric contours, each representing a different level of the loss function. This creates a visual representation of the shape of the loss landscape and allows one to see how the loss changes as a function of the model's parameters.
+</br></br>
+Finally, one can also use random directions to visualize the loss landscape. This involves selecting a random direction in the high-dimensional space and then projecting the points onto this direction to create a two-dimensional surface. This can provide a different perspective on the loss landscape and can help to identify areas of the space where the loss is particularly high or low.
+</br></br>
+Overall, these techniques can provide valuable insights into the performance of a machine learning model and can help to identify potential improvements or issues with the model.
+</br></br>
+
+
+</br></br> </br>
+
 ## Sharpness Aware Minimization (SAM)
 Sharpness Aware Minimization (SAM) analyzes the geometry of the parameter space induced by the symmetries of deep learning models, allowing for the identification of regions of the loss landscape where the minima are flatter. This information can be used to guide the training process and improve the performance of the model. SAM does not just identify when a good solution is reached, but forces the model in directions with smoother loss landscapes. 
 </br></br> 
@@ -67,38 +91,18 @@ A loss landscape traversal strategy, as defined here, determines how to vary the
 </br> 
 As seen above, we found that pertubation directions applied to the model as a whole were more reliable for evaluting vision transformers. In contrast, layer or filter pertubation techniques often reveal more information for highly structured models stuch as CNN's. 
 </br> </br> 
-
-Topics to Cover 
- -Plot Strategy
- -Uniform Generation Metrics
- -Initial Base Plot Exploration
- -Interpretable Scale and Color
- -Model Traversal Strategies
- -Python Packages
-
+__Generation Metrics__</br> 
+After determining a traversal strategy, determine how far to traverse and the density of points to plot. Larger model traversals capture broader information, relevant to the overall training efficiency and often revealing more information about the dataset. Smaller model traversals capture local changes, revealing more information about the optimization process and training progression. 
+</br> </br> 
+__Plot Scaling and Coloring__</br> 
+Last, plots must be graphed using the same scale and color gradients. Even slight differences in the coloring can lead to misleading comparisons. For example, if we were to replot the graph from Traversal Strategies, we could artificially scale the loss plot to find what seems to be a deeper or sharper landscape. Forgetting to scale all plots similarly make it difficult to gain insight from plots. 
+**scale.png**
+</br> </br>
 
 
+## Loss Landscapes for Strategical Model Improvement
 
 
-
-
-
-## Further Exploration of Loss Landscapes
-
-
-</br></br>
-The loss landscape is typically plotted on a graph, with the x-axis representing the number of training iterations (also known as epochs) and the y-axis representing the value of the loss function. The resulting graph will typically have a distinctive "valley" shape, with the loss decreasing as the model is trained and reaching a minimum at the end of training. This minimum value is the point at which the model has achieved the best possible performance on the given dataset.
-</br></br>
-The math behind the loss landscape involves a number of complex concepts from machine learning and optimization theory. At a high level, the loss function used in the loss landscape is typically a measure of the difference between the model's predicted output and the true output. This difference is often quantified using a metric such as mean squared error or cross-entropy loss. The gradient descent algorithm used to train the model then adjusts the model's parameters in order to minimize this loss function, ultimately leading to a model that is able to make accurate predictions.
-</br></br>
-After training a machine learning model, one can visualize the loss landscape by using various techniques that reduce the high dimensionality of the model's parameter space and the data space to a two-dimensional surface. One such technique is 1-dimensional linear interpolation, which involves projecting the high-dimensional space onto a one-dimensional line and then interpolating the points on this line to create a two-dimensional surface.
-</br></br>
-Another technique is to use contour plots, which involve dividing the two-dimensional surface into a series of concentric contours, each representing a different level of the loss function. This creates a visual representation of the shape of the loss landscape and allows one to see how the loss changes as a function of the model's parameters.
-</br></br>
-Finally, one can also use random directions to visualize the loss landscape. This involves selecting a random direction in the high-dimensional space and then projecting the points onto this direction to create a two-dimensional surface. This can provide a different perspective on the loss landscape and can help to identify areas of the space where the loss is particularly high or low.
-</br></br>
-Overall, these techniques can provide valuable insights into the performance of a machine learning model and can help to identify potential improvements or issues with the model.
-</br></br>
 
 
 
