@@ -34,7 +34,9 @@ Previous work has shown that structure of the loss landscape foretells the gener
 
 More recent research has also investigated how loss landscapes can improve model training. By developing a more generalizable model early in training, the final solution reached will both be more generalizable as well as more powerful. Work ([Foret et al](https://arxiv.org/abs/2010.01412)) has found great success designing optimizers around finding smoother areas of the loss landscape. Sharpness-Aware Minimization, or SAM, minimizes both loss and loss sharpness. This directly causes the loss landscape to be smoother while training, and the results are impressive! A ResNet-101 model trained on ImageNet using SAM had a 3.3% error decrease compared to a equivalent model without SAM. Similarly our Visual Transformer model showed a 10% improvement on ImageNet-100 using SAM as seen in the image below. 
 
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png)
+<p align="center">
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png" width="900" />
+</p>
 Image from [Foret et al](https://arxiv.org/abs/2010.01412) Depecting loss landscapes before (left) and after (right) training with SAM 
 
 ## Sharpness Aware Minimization (SAM)
@@ -46,16 +48,21 @@ The geometry of the parameter space can be changed by choosing a different repar
 
 Let’s say our model wandered into a sharp minima, we start by computing the gradient as usual, which would typically lead us to oscillate in the current minima (even with momentum). 
 
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-1.png)
+<p align="center">
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-1.png" width="900" />
+</p>
 
 So, we then move the opposite direction, scaled by a factor called rho. 
 
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-2.png)
+<p align="center">
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-2.png" width="900" />
+</p>
 
 Last, we use the gradient calculated at the second location to step from our original location. This effectively uses the sharpness of the surrounding landscape to force it to new areas. 
 
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-3.png)
-
+<p align="center">
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/Step-3.png" width="900" />
+</p>
 
 Thus, by changing the geometry of the parameter space to smoothen out local minima, the model more easily identifies new regions of the loss landscape that may be more generalizable and higher performing. 
 
@@ -67,7 +74,9 @@ with the dimensions and axes of the plot being determined by the specific parame
 Since the loss landscape selects only a slice of the true function space, it is essential to understand the various techniques for slicing as well as heuristics for improving loss landscape reliability and interpretability. 
 As seen in the example below, even modifications to the distance to traverse can lead to large, unintuitive changes in the loss landscape visualization. Here, we'd expect the loss landscape traversed over a 2x2 traversal grid would encompass an identical 1x1 traversal grid within the graph. Unintuitively, we see that changing the size of the traversal grid leads to a new slice and exploration that is substantially smoother. 
 
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/diff-plane.png)
+<p align="center">
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/diff-plane.png" width="900" />
+</p>
 
 Despite this limitation, the loss landscape can still be a useful tool for understanding how the model is training and identifying potential problems or issues with the optimization process. 
 For example, wide exploration techniques with large batch sizes may be used to evaluate data augmentation techniques. A smoothly loss landscape likely indicates that the dataset is well patched and continous. In contrast, narrow loss exploration techniques provides insight into hyperparameterization, evaluating how fast a model is converging and to what type of solution. 
@@ -79,7 +88,9 @@ When designing loss plots, we recommend considering traversal strategies, genera
 
 __Traversal Strategies__ 
 A loss landscape traversal strategy, as defined here, determines how to vary the parameters of the model in order identify the loss of nearby model paramater settings. One could arbitrarily increase the loss by adding noise to all the paramaters of the model, but this reveals little about the model properties other than it's robustness to parameter pertubation. Thus, more powerful techniques include selecting specific axis of pertubation applied either to the whole model, layers individually, or with a filter strategy developed by \[ref loss for NN paper\]. In the plots below, we compare these three traversal strategies on a Vision Transformer trained with a small learning rate, causing it to quickly converge into a poor local minima.  
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/traversal.png)
+<p align="center">
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/traversal.png" width="900" />
+</p>
 
 As seen above, we found that pertubation directions applied to the model as a whole were more reliable for evaluting vision transformers. In contrast, layer or filter pertubation techniques often reveal more information for highly structured models stuch as CNN's. 
  
@@ -88,5 +99,7 @@ After determining a traversal strategy, determine how far to traverse and the de
  
 __Plot Scaling and Coloring__ 
 Last, plots must be graphed using the same scale and color gradients. Even slight differences in the coloring can lead to misleading comparisons. For example, if we were to replot the graph from Traversal Strategies, we could artificially scale the loss plot to find what seems to be a deeper or sharper landscape. Forgetting to scale all plots similarly make it difficult to gain insight from plots. 
-![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/scale.png)
+<p align="center">
+<img src="{{ site.url }}/public/images/2022-12-01-loss-landscapes/scale.png" width="900" />
+</p>
 
