@@ -6,7 +6,7 @@ authors: Jacob Hansen, Christian Cmehil-Warn
 ---
 
 # Visualizing the Loss Landscape 
-The loss landscape graphically represents the model's loss function, a measure of how well the model can make predictions on a given dataset. Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution \[ref...\]. Furthermore, recent optimization methods leverage local loss information to traverse the loss landscape and lead to drastic training improvements \[ref SAM\]. Most papers use loss visualization to validate model performance and provide comparison between solutions. In contrast, here we describe methods and heuristics for analyzing the loss landscape with the intention to improve model architecture, adjust training hyperparameters, and gain insight into the training process of large models. 
+The loss landscape graphically represents the model's loss function, a measure of how well the model can make predictions on a given dataset. Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution ([Keskar et al.](https://arxiv.org/abs/1609.04836)). Furthermore, recent optimization methods leverage local loss information to traverse the loss landscape and lead to drastic training improvements ([Foret et al](https://arxiv.org/abs/2010.01412)). Most papers use loss visualization to validate model performance and provide comparison between solutions. In contrast, here we describe methods and heuristics for analyzing the loss landscape with the intention to improve model architecture, adjust training hyperparameters, and gain insight into the training process of large models. 
 
 
 ## A Deeper Background Into Loss
