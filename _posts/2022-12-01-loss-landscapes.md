@@ -27,6 +27,7 @@ Picture from [here](https://medium.com/greyatom/what-is-underfitting-and-overfit
 The loss landscape **graphically** represents how the model's loss function changes as the model parameters change. Exmining the loss landscape's width and smoothness provides meaningful insight into model performance.
 
 ![]({{ site.url }}/public/images/2022-12-01-loss-landscapes/visualizing-loss.png)
+Image from [Foret et al](https://arxiv.org/abs/2010.01412) Depecting loss landscapes before and after training with SAM
 
 Previous work has shown that structure of the loss landscape foretells the generalizability and robustness on a model solution ([Keskar et al.](https://arxiv.org/abs/1609.04836)). Keskar et al explores how optimizing CNNs on small batches of data (e.g. stochastic gradient descent) vs large batches of data affect the loss landscape of models. They find that small-batch training results in loss landscapes that have a minima with a wider opening at the top, resulting in more generalizable models
 
